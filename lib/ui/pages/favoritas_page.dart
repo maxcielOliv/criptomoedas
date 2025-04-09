@@ -13,7 +13,7 @@ class _FavoritasPageState extends State<FavoritasPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).primaryColor ,
         title: Text('Moedas Favoritas'),
       ),
     );
