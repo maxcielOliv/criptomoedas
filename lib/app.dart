@@ -11,7 +11,10 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        primaryColor: Colors.indigo
+        primaryColor: Colors.indigo,
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Colors.white)
+        )
       ),
       color: Colors.indigo,
       home: HomePage(),

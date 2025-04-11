@@ -34,7 +34,7 @@ class _MoedaDetalhePageState extends State<MoedaDetalhePage> {
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text(widget.moeda.nome, style: TextStyle(color: Colors.white)),
+        title: Text(widget.moeda.nome),
       ),
       body: Padding(
         padding: EdgeInsets.all(24),
