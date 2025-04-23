@@ -1,3 +1,4 @@
+import 'package:criptomoedas/configs/app_settings.dart';
 import 'package:criptomoedas/model/moeda.dart';
 import 'package:criptomoedas/repository/favoritas_repository.dart';
 import 'package:criptomoedas/ui/pages/moeda_detalhe_page.dart';
@@ -15,9 +16,38 @@ class MoedasPage extends StatefulWidget {
 
 class _MoedasPageState extends State<MoedasPage> {
   final tabela = MoedaRepository.tabela;
-  NumberFormat real = NumberFormat.currency(locale: 'pt_BR', name: 'R\$');
+  late NumberFormat real;
+  late Map<String, String> localizacao;
   List<Moeda> selecionadas = [];
   late FavoritasRepository favoritas;
+
+  readNumberFormat() {
+    localizacao = context.watch<AppSettings>().locale;
+    real = NumberFormat.currency(
+      locale: localizacao['locale'],
+      name: localizacao['name'],
+    );
+  }
+
+  changeLanguageButton() {
+    final locale = localizacao['locale'] == 'pt_BR' ? 'en_US' : 'pt_BR';
+    final name = localizacao['name'] == 'R\$' ? '\$' : 'R\$';
+    return PopupMenuButton(
+      icon: Icon(Icons.language, color: Colors.white,),
+      itemBuilder:
+          (context) => [
+            PopupMenuItem(
+              child: ListTile(
+                leading: Icon(Icons.swap_vert),
+                title: Text('Usar $locale'),
+              ),
+              onTap: () {
+                context.read<AppSettings>().setLocale(locale, name);
+              },
+            ),
+          ],
+    );
+  }
 
   appBarDinamica() {
     if (selecionadas.isEmpty) {
@@ -25,6 +55,9 @@ class _MoedasPageState extends State<MoedasPage> {
         title: Text('Cripto Moedas'),
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
+        actions: [
+          changeLanguageButton(),
+        ],
       );
     } else {
       return AppBar(
@@ -67,6 +100,7 @@ class _MoedasPageState extends State<MoedasPage> {
   @override
   Widget build(BuildContext context) {
     favoritas = Provider.of<FavoritasRepository>(context);
+    readNumberFormat();
     return Scaffold(
       appBar: appBarDinamica(),
       body: ListView.separated(
@@ -85,9 +119,9 @@ class _MoedasPageState extends State<MoedasPage> {
                   tabela[index].nome,
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                 ),
-                if (favoritas.lista.contains(tabela[index])) 
-                Icon(Icons.circle, color: Colors.amber, size: 8),
-              ],              
+                if (favoritas.lista.contains(tabela[index]))
+                  Icon(Icons.circle, color: Colors.amber, size: 8),
+              ],
             ),
             trailing: Text(real.format(tabela[index].preco)),
             selected: selecionadas.contains(tabela[index]),
