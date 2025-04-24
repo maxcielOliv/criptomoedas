@@ -1,4 +1,3 @@
-
 import 'package:criptomoedas/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
