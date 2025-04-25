@@ -1,3 +1,4 @@
+import 'package:criptomoedas/ui/pages/configuracoes_page.dart';
 import 'package:criptomoedas/ui/pages/favoritas_page.dart';
 import 'package:criptomoedas/ui/pages/moedas_page.dart';
 import 'package:flutter/material.dart';
@@ -30,22 +31,25 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: PageView(
         controller: pageController,
-        onPageChanged: 
-           setPaginaAtual,
-        children: [MoedasPage(), FavoritasPage(),],
+        onPageChanged: setPaginaAtual,
+        children: [MoedasPage(), FavoritasPage(), ConfiguracoesPage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: paginaAtual,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Todas'),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Favoritas'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Configurações',
+          ),
         ],
         onTap:
             (pagina) => {
               pageController.animateToPage(
                 pagina,
-                duration: Duration(milliseconds: 400),
-                curve: Curves.bounceIn,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.decelerate,
               ),
             },
       ),

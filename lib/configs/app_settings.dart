@@ -37,7 +37,7 @@ class AppSettings extends ChangeNotifier {
   setLocale(String local, String name) async {
     //await _prefs.setString('local', local);
     //await _prefs.setString('name', name);
-    await box.put('local', local);
+    await box.put('locale', local);
     await box.put('name', name);
     await _readLocale();
   }

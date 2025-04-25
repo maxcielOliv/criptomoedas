@@ -26,7 +26,7 @@ class _FavoritasPageState extends State<FavoritasPage> {
         builder: (context, favoritas, child) {
           return favoritas.lista.isEmpty
               ? ListTile(
-                title: Text('Ainda não há moedas favoritas'),
+                title: Center(child: Text('Ainda não há moedas favoritas')),
               )
               : ListView.separated(
                 itemBuilder: (context, index) {

@@ -12,6 +12,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.indigo,
         primaryColor: Colors.indigo,
         appBarTheme: AppBarTheme(
+          backgroundColor: Colors.indigo,
           titleTextStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Colors.white)
         )
       ),
